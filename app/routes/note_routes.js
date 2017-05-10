@@ -5,8 +5,12 @@
 module.exports = function(app, db) {
   // your CREATE route goes here:
   // When the app receives a POST request to the /notes path, it will execute the code inside the callback- passing in a request object, which contains the parameters or JSON of the request, and a response object, used to reply.
+  // req is request and res is response, the response here being 'Hello'. These must be built-in parameters from the Express library??
   // Test this in Postman
   app.post('/notes', (req, res) => {
+    // Unfortunately, Express can’t process URL encoded forms on its own. But you did install that body-parser package… So ask express to use the bodyParser in the server.js file
+
+    console.log(req.body)
     // create note here:
     res.send('Hello')
   });
