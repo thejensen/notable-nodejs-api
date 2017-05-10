@@ -9,9 +9,13 @@ module.exports = function(app, db) {
   // Test this in Postman
   app.post('/notes', (req, res) => {
     // Unfortunately, Express can’t process URL encoded forms on its own. But you did install that body-parser package… So ask express to use the bodyParser in the server.js file
-
-    console.log(req.body)
-    // create note here:
-    res.send('Hello')
+    const note = { text: req.body.body, title: req.body.title };
+    db.collection('notes').insert(note, (err, result) => {
+      if (err) {
+        res.send({ 'error': 'An error has occurred' });
+      } else {
+        res.send(result.ops[0]);
+      }
+    });
   });
 };
